@@ -1,0 +1,12 @@
+#+title: Some Personal Programs
+
+This packages collects some programs I install to my personal accounts.
+
+Clone and ~cd~ to the ~per/~ source and
+
+#+begin_example
+./install.sh
+#+end_example
+ 
+For now, this is pretty dumb.
+- [ ] Replace the brute force script with a DAG runner (waf/make/snakemake/???)

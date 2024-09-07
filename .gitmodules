@@ -1,0 +1,9 @@
+[submodule "rephile"]
+	path = rephile
+	url = git@github.com:brettviren/rephile.git
+[submodule "barpyrus"]
+	path = barpyrus
+	url = git@github.com:t-wissmann/barpyrus.git
+[submodule "herbie"]
+	path = herbie
+	url = git@github.com:brettviren/herbie.git
