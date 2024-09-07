@@ -13,26 +13,42 @@ set -e
 set -x
 
 
-
 pip install pyinstaller
-for main in rephile herbie
-do
-    if [ ! -f $main/requirements.txt ] ; then
-        continue
+
+do_install () {
+    main=$1 ; shift
+    
+    if [ -f $main/requirements.txt ] ; then
+        cd $main
+        pip install -r requirements.txt
+        cd -
     fi
-    cd $main
-    pip install -r requirements.txt
-    cd -
-done
-for main in rephile herbie
-do
+
+    args="--onefile -n $main"
+    for mod in $@
+    do
+        args="$args --hidden-import $mod"
+    done
+
+    mainsrc=""
     if [ -f $main/$main/__main__.py ] ; then
-        pyinstaller --onefile -n $main $main/$main/__main__.py
+        mainsrc="$main/$main/__main__.py"
     elif [ -f $main/${main}.py ] ; then
-        pyinstaller --onefile -n $main $main/${main}.py
+        mainsrc="$main/${main}.py"
     else
         echo "SKIPPING package $main, does not fit any pattern."
-        continue
+        return
     fi
-    cp dist/$main ~/sync/bin/
-done
+    pyinstaller $args $mainsrc
+
+    if [ -f dist/$main ] ; then
+        cp dist/$main ~/sync/bin/
+    else
+        echo "FAILED to build $main"
+    fi
+}
+
+do_install rephile
+do_install herbie
+do_install barpyrus multiprocessing
+
