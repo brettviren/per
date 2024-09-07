@@ -7,3 +7,6 @@
 [submodule "herbie"]
 	path = herbie
 	url = git@github.com:brettviren/herbie.git
+[submodule "titome"]
+	path = titome
+	url = git@github.com:brettviren/titome.git
