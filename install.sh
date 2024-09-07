@@ -57,7 +57,19 @@ do_install () {
     fi
 }
 
+# install promnesia purely via pip, no source.
+do_install_promnesia () {
+    pybin=$(dirname $(which python))
+
+    pip install promnesia orgparse mistletoe python-magic bs4 HPI cashew logzero orjson mypy git+https://github.com/karlicoss/rexport
+    pyinstaller --onefile --hidden-import orgparse --hidden-import mistletoe --hidden-import python-magic --hidden-import bs4 --hidden-import HPI --hidden-import cashew --hidden-import logzero --hidden-import orgjson --hidden-import mypy --hidden-import rexport  -n promnesia $pybin/promnesia
+    rm -f ~/sync/bin/promnesia
+    cp dist/promnesia ~/sync/bin/
+}
+
 do_install rephile
 do_install herbie
 do_install barpyrus multiprocessing
 do_install titome 
+do_install_promnesia
+
