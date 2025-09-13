@@ -1,3 +1,23 @@
 #+title: per - a simple personal package manager.
 
 This is nothing much more than a loop over a list of packages calling ~uv~.
+
+* Usage
+
+#+begin_example
+$ uv tool install git+https://github.com/brettviren/per
+#+end_example
+
+Make a config file and
+
+#+begin_example
+$ per install
+#+end_example
+
+Later,
+
+#+begin_example
+$ per upgrade
+#+end_example
+
+That's it for now.
