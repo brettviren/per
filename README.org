@@ -1,0 +1,3 @@
+#+title: per - a simple personal package manager.
+
+This is nothing much more than a loop over a list of packages calling ~uv~.

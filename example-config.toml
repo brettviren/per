@@ -1,0 +1,42 @@
+[package.ampersand]
+source = "git+https://github.com/brettviren/ampersand"
+
+[package.miageru]
+source = "git+https://github.com/brettviren/miageru"
+
+[package.myougiden]
+source = "git+https://github.com/brettviren/myougiden"
+
+[package.barpyrus]
+source = "git+https://github.com/t-wissmann/barpyrus"
+
+[package.titome]
+source = "git+https://github.com/brettviren/titome"
+with = ["pytz", "parsedatetime"]
+
+[package.herbie]
+source = "git+https://github.com/brettviren/herbie"
+
+[package.rephile]
+source = "git+https://github.com/brettviren/rephile"
+
+[package.promnesia]
+with = ["orgparse", "mistletoe", "python-magic", "bs4", "HPI", "cashew",
+     "logzero", "orjson", "mypy", "git+https://github.com/karlicoss/rexport"]
+source = "git+https://github.com/karlicoss/promnesia"
+
+[package.magic-wormhole]
+source = "magic-wormhole"
+
+[package.wirecell]
+source = "git+https://github.com/wirecell/wire-cell-python"
+
+[package.dune-people]
+source = "git+https://github.com/brettviren/dune-people"
+
+[package.wget-spider]
+source = "git+https://github.com/brettviren/wget-spider"
+
+[package.imp]
+source = "git+https://github.com/brettviren/imp"
+
