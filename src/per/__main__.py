@@ -59,12 +59,15 @@ def cmd_list(ctx):
 
 
 @cli.command("install")
+@click.option("-f","--force", is_flag=True, default=False,
+              help='Force the installation')
 @click.argument("packages", nargs=-1)
 @click.pass_context
-def cmd_install(ctx, packages):
+def cmd_install(ctx, force, packages):
     '''
-    Install packages.  If no packages, apply to all
+    Install packages.  If no packages, apply to all in the config file.
     '''
+    # fixme: add --force
 
     pcfg = ctx.obj["config"].get("package")
 
@@ -77,11 +80,13 @@ def cmd_install(ctx, packages):
 
     for pname in packages:
         pdata = pcfg[pname]
-        withs = ['--with='+w for w in pdata.get("with", [])]
+        opts = ['--with='+w for w in pdata.get("with", [])]
+        if force:
+            opts += ['--force']
         source = pdata["source"]
         out = StringIO()
         err = StringIO()
-        cmd = uti.bake(withs + [source])
+        cmd = uti.bake(opts + [source])
         print(cmd)
         cmd(_out=out, _err=err)
         if (out):
@@ -96,7 +101,11 @@ def cmd_install(ctx, packages):
 @click.pass_context
 def cmd_upgrade(ctx, packages):
     '''
-    Install packages.  If no packages, apply to all
+    Upgrade existing packages.  If no packages, apply to all.
+
+    Note, this ignores details of each package, upgrading it given existing
+    installation options.  A change in configured "with" for example will not
+    take effect.  Use the 'install' command instead to apply such changes.
     '''
 
     pcfg = ctx.obj["config"].get("package")
@@ -109,7 +118,8 @@ def cmd_upgrade(ctx, packages):
     uti = sh.uv.bake(args)
 
     for pname in packages:
-        pdata = pcfg[pname]
+        # upgrade only uses name
+        # pdata = pcfg[pname]
         out = StringIO()
         err = StringIO()
         cmd = uti.bake([pname])
